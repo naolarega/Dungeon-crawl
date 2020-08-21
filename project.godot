@@ -16,7 +16,19 @@ _global_script_class_icons={
 [application]
 
 config/name="Dungeon crawl"
+run/main_scene="res://ui/Intro.tscn"
+boot_splash/bg_color=Color( 0.141176, 0.141176, 0.141176, 1 )
 config/icon="res://icon.png"
+config/windows_native_icon="res://icon.ico"
+
+[display]
+
+window/size/width=960
+window/size/height=540
+window/size/resizable=false
+window/size/fullscreen=true
+window/stretch/mode="2d"
+window/stretch/aspect="keep"
 
 [rendering]
 
