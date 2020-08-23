@@ -38,8 +38,12 @@ func _input(event):
 		change_button(current_button)
 	if event.is_action_pressed("ui_accept"):
 		if current_button == menu_buttons.PLAY:
-			pass
+			#$MarginContainer/HBoxContainer/SubMenus/MarginContainer/PlaySubMenu.visible = true
+			#$MarginContainer/HBoxContainer/SubMenus/MarginContainer/HelpSubMenu.visible = false
+			if get_tree().change_scene("res://game/Game.tscn") != OK:
+				return
 		elif current_button == menu_buttons.HELP:
-			pass
+			$MarginContainer/HBoxContainer/SubMenus/MarginContainer/PlaySubMenu.visible = false
+			$MarginContainer/HBoxContainer/SubMenus/MarginContainer/HelpSubMenu.visible = true
 		elif current_button == menu_buttons.EXIT:
 			get_tree().quit()

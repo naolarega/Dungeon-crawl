@@ -1,13 +1,23 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://scripts/MainMenu.gd" type="Script" id=1]
 [ext_resource path="res://images/play_selected.png" type="Texture" id=2]
 [ext_resource path="res://images/exit.png" type="Texture" id=3]
 [ext_resource path="res://images/help.png" type="Texture" id=4]
 [ext_resource path="res://images/corners.png" type="Texture" id=5]
+[ext_resource path="res://images/submenu_corners.png" type="Texture" id=6]
+[ext_resource path="res://images/save_empty.png" type="Texture" id=7]
+[ext_resource path="res://fonts/AatrixOCRAEXT.TTF" type="DynamicFontData" id=8]
 
-[sub_resource type="Animation" id=1]
-resource_name = "fade in"
+[sub_resource type="DynamicFont" id=1]
+size = 30
+font_data = ExtResource( 8 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 30
+font_data = ExtResource( 8 )
+
+[sub_resource type="Animation" id=2]
 length = 2.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("ColorRect:color")
@@ -20,6 +30,30 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
 "values": [ Color( 0.478431, 0.345098, 0.345098, 1 ), Color( 0.478431, 0.345098, 0.345098, 1 ), Color( 0.576471, 0.576471, 0.576471, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("MarginContainer:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1.5, 2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("NinePatchRect:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1.5, 2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
 }
 
 [node name="MainMenu" type="Control"]
@@ -91,9 +125,164 @@ texture = ExtResource( 3 )
 
 [node name="SubMenus" type="Control" parent="MarginContainer/HBoxContainer"]
 margin_left = 190.0
-margin_right = 190.0
+margin_right = 760.0
 margin_bottom = 390.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="NinePatchRect" type="NinePatchRect" parent="MarginContainer/HBoxContainer/SubMenus"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 6 )
+patch_margin_left = 20
+patch_margin_top = 20
+patch_margin_right = 20
+patch_margin_bottom = 20
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer/SubMenus"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 50
+custom_constants/margin_top = 50
+custom_constants/margin_left = 50
+custom_constants/margin_bottom = 50
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlaySubMenu" type="Control" parent="MarginContainer/HBoxContainer/SubMenus/MarginContainer"]
+margin_left = 50.0
+margin_top = 50.0
+margin_right = 520.0
+margin_bottom = 340.0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/HBoxContainer/SubMenus/MarginContainer/PlaySubMenu"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SaveGameLists" type="VBoxContainer" parent="MarginContainer/HBoxContainer/SubMenus/MarginContainer/PlaySubMenu/ScrollContainer"]
+margin_right = 384.0
+margin_bottom = 516.0
+
+[node name="Slot1" type="HBoxContainer" parent="MarginContainer/HBoxContainer/SubMenus/MarginContainer/PlaySubMenu/ScrollContainer/SaveGameLists"]
+margin_right = 384.0
+margin_bottom = 100.0
+custom_constants/separation = 50
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/SubMenus/MarginContainer/PlaySubMenu/ScrollContainer/SaveGameLists/Slot1"]
+margin_right = 100.0
+margin_bottom = 100.0
+texture = ExtResource( 7 )
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/SubMenus/MarginContainer/PlaySubMenu/ScrollContainer/SaveGameLists/Slot1"]
+margin_left = 150.0
+margin_top = 34.0
+margin_right = 384.0
+margin_bottom = 66.0
+custom_fonts/font = SubResource( 1 )
+text = "No saved game"
+
+[node name="Slot2" type="HBoxContainer" parent="MarginContainer/HBoxContainer/SubMenus/MarginContainer/PlaySubMenu/ScrollContainer/SaveGameLists"]
+margin_top = 104.0
+margin_right = 384.0
+margin_bottom = 204.0
+custom_constants/separation = 50
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/SubMenus/MarginContainer/PlaySubMenu/ScrollContainer/SaveGameLists/Slot2"]
+margin_right = 100.0
+margin_bottom = 100.0
+texture = ExtResource( 7 )
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/SubMenus/MarginContainer/PlaySubMenu/ScrollContainer/SaveGameLists/Slot2"]
+margin_left = 150.0
+margin_top = 34.0
+margin_right = 384.0
+margin_bottom = 66.0
+custom_fonts/font = SubResource( 1 )
+text = "No saved game"
+
+[node name="Slot3" type="HBoxContainer" parent="MarginContainer/HBoxContainer/SubMenus/MarginContainer/PlaySubMenu/ScrollContainer/SaveGameLists"]
+margin_top = 208.0
+margin_right = 384.0
+margin_bottom = 308.0
+custom_constants/separation = 50
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/SubMenus/MarginContainer/PlaySubMenu/ScrollContainer/SaveGameLists/Slot3"]
+margin_right = 100.0
+margin_bottom = 100.0
+texture = ExtResource( 7 )
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/SubMenus/MarginContainer/PlaySubMenu/ScrollContainer/SaveGameLists/Slot3"]
+margin_left = 150.0
+margin_top = 34.0
+margin_right = 384.0
+margin_bottom = 66.0
+custom_fonts/font = SubResource( 1 )
+text = "No saved game"
+
+[node name="Slot4" type="HBoxContainer" parent="MarginContainer/HBoxContainer/SubMenus/MarginContainer/PlaySubMenu/ScrollContainer/SaveGameLists"]
+margin_top = 312.0
+margin_right = 384.0
+margin_bottom = 412.0
+custom_constants/separation = 50
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/SubMenus/MarginContainer/PlaySubMenu/ScrollContainer/SaveGameLists/Slot4"]
+margin_right = 100.0
+margin_bottom = 100.0
+texture = ExtResource( 7 )
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/SubMenus/MarginContainer/PlaySubMenu/ScrollContainer/SaveGameLists/Slot4"]
+margin_left = 150.0
+margin_top = 34.0
+margin_right = 384.0
+margin_bottom = 66.0
+custom_fonts/font = SubResource( 1 )
+text = "No saved game"
+
+[node name="Slot5" type="HBoxContainer" parent="MarginContainer/HBoxContainer/SubMenus/MarginContainer/PlaySubMenu/ScrollContainer/SaveGameLists"]
+margin_top = 416.0
+margin_right = 384.0
+margin_bottom = 516.0
+custom_constants/separation = 50
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/SubMenus/MarginContainer/PlaySubMenu/ScrollContainer/SaveGameLists/Slot5"]
+margin_right = 100.0
+margin_bottom = 100.0
+texture = ExtResource( 7 )
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/SubMenus/MarginContainer/PlaySubMenu/ScrollContainer/SaveGameLists/Slot5"]
+margin_left = 150.0
+margin_top = 34.0
+margin_right = 384.0
+margin_bottom = 66.0
+custom_fonts/font = SubResource( 1 )
+text = "No saved game"
+
+[node name="HelpSubMenu" type="Control" parent="MarginContainer/HBoxContainer/SubMenus/MarginContainer"]
+visible = false
+margin_left = 50.0
+margin_top = 50.0
+margin_right = 520.0
+margin_bottom = 340.0
+
+[node name="RichTextLabel" type="Label" parent="MarginContainer/HBoxContainer/SubMenus/MarginContainer/HelpSubMenu"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = SubResource( 3 )
+text = "Controls:
+up : up key
+down : down key
+select : enter key"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "fade in"
-"anims/fade in" = SubResource( 1 )
+"anims/fade in" = SubResource( 2 )
